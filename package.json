@@ -1,0 +1,14 @@
+{
+  "name": "indecision",
+  "version": "1.0.0",
+  "description": "indecision project",
+  "scripts": {},
+  "author": "Ben Brown",
+  "license": "ISC",
+  "devDependencies": {},
+  "dependencies": {
+    "babel-preset-env": "1.5.2",
+    "babel-preset-react": "6.24.1"
+  },
+  "main": "index.js"
+}
