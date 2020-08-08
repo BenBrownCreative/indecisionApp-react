@@ -1,6 +1,6 @@
 'use strict';
 
-console.log('app js is running');
+console.log('hi there');
 // jsx - Javascript xml 
 // if an expression resolves to undefined - nothing shows up
 
@@ -22,9 +22,15 @@ var onFormSubmit = function onFormSubmit(e) {
     }
 };
 
-var resetOptions = function resetOptions() {
+var onRemoveAll = function onRemoveAll() {
     app.options = [];
     renderForm();
+};
+var onMakeDecision = function onMakeDecision() {
+    var randomNum = Math.floor(Math.random() * app.options.length);
+    var option = app.options[randomNum];
+    alert(option);
+    console.log(randomNum);
 };
 var appRoot = document.getElementById('app');
 
@@ -51,13 +57,30 @@ var renderForm = function renderForm() {
         ),
         React.createElement(
             'button',
-            { onClick: resetOptions },
-            'reset'
+            { disabled: app.options.length === 0, onClick: onMakeDecision },
+            'What should I do?'
+        ),
+        React.createElement(
+            'button',
+            { onClick: onRemoveAll },
+            'Remove all'
         ),
         React.createElement(
             'p',
             null,
             app.options.length
+        ),
+        React.createElement(
+            'ol',
+            null,
+            app.options.map(function (option, i) {
+                return React.createElement(
+                    'li',
+                    { key: i },
+                    option,
+                    ' '
+                );
+            })
         ),
         React.createElement(
             'form',
@@ -70,6 +93,7 @@ var renderForm = function renderForm() {
             )
         )
     );
+    // what are we rendering and where
     ReactDOM.render(template, appRoot);
 };
 renderForm();

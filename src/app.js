@@ -1,4 +1,4 @@
-console.log('app js is running');
+console.log('hi there');
 // jsx - Javascript xml 
 // if an expression resolves to undefined - nothing shows up
 
@@ -20,9 +20,15 @@ const onFormSubmit = (e) => {
     }
 }
 
-const resetOptions = () => {
+const onRemoveAll = () => {
     app.options = [];
-    renderForm();
+    renderForm(); 
+}
+const onMakeDecision = () => {
+    const randomNum = Math.floor(Math.random() * app.options.length);
+    const option = app.options[randomNum];
+    alert(option);
+    console.log(randomNum);
 }
 const appRoot = document.getElementById('app');
 
@@ -33,9 +39,14 @@ const renderForm = () => {
         {app.title && <h1>{app.title}</h1>}
         {app.subtitle && <p>{app.subtitle}</p>}
         <p>{app.options.length > 0 ? 'Here are your options' : 'No Options'}</p>
-        <button onClick={resetOptions}>reset</button>
+        <button disabled={app.options.length === 0} onClick={onMakeDecision}>What should I do?</button>
+        <button onClick={onRemoveAll}>Remove all</button>
         <p>{app.options.length}</p>
-
+        <ol>
+        {
+            app.options.map((option, i) => <li key={i}>{option} </li>)
+        }
+        </ol>
         
         <form onSubmit={onFormSubmit}>
             <input type='text' name='option' />
@@ -43,6 +54,7 @@ const renderForm = () => {
         </form>
     </div>
     );
+    // what are we rendering and where
     ReactDOM.render(template, appRoot);
 }
 renderForm();
