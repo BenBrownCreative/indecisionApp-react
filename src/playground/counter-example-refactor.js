@@ -10,6 +10,25 @@ class Counter extends React.Component {
             count: 0
         }
     }
+    componentDidMount() {
+        try {
+            const countJson = localStorage.getItem('count');
+            const count = JSON.parse(countJson);
+
+            if (!isNaN(count)) {
+                this.setState(() => ({ count }));
+            }
+        }
+        catch (e) {
+            // do nothing
+        }
+    }
+    componentDidUpdate(prevProps, prevState) {
+        if (prevState.count !== this.state.count) {
+            localStorage.setItem('count', JSON.stringify(this.state.count));
+        }
+        
+    }
     handleAddOne() {
         // in order to manipulate the state variable we need to call setState function
         // the first argument is the previous state
